@@ -23,6 +23,9 @@ function Validator(options){
                     }, {});
                     options.onSubmit(formValues);
                 }
+                else{
+                    formElement.submit()
+                }
             }
         }
 
@@ -107,6 +110,26 @@ Validator.isConfirmed = function(selector, getConfirmValue, message){
     }
 }
 
+Validator({
+    form: '#form-1',
+    errorSelector: '.form-message',
+    rules: [
+        Validator.isRequired('#fullname'),
+        Validator.isRequired('#email'),
+        Validator.isEmail('#email'
+            ,'Truong nay phai la email'),
+        Validator.isRequired('#password'),
+        Validator.minLength('#password', 6
+            ,'Vui long nhap mat khau tren 6 ky tu'),
+        Validator.isRequired('#password_confirmation'),
+        Validator.isConfirmed('#password_confirmation', function(){
+            return document.querySelector('#form-1 #password').value;
+        }, 'Mat khau nhap lai khong chinh xac'),
+    ],
+    onSubmit: function(data){
+        console.log(data)
+    }
+});
 
 
 
