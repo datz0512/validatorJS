@@ -86,7 +86,7 @@ Validator.isEmail = (selector, message) => {
     return{
         selector: selector,
         test: (value) => {
-            var regex = /^\w+q([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             return regex.test(value) ? undefined : message
         }
     }
