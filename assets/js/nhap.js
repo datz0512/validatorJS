@@ -9,7 +9,7 @@ function Validator(options){
 
             options.rules.forEach(function(rule){
                 var inputElement = formElement.querySelector(rule.selector)
-                var isValid = validate(inputElement, rule)  //Boolean
+                var isValid = validate(inputElement, rule)  //Booleanq
                 if(!isValid){
                     isFormValid = false;
                 }
@@ -22,6 +22,9 @@ function Validator(options){
                         return (values[input.name] = input.value) && values
                     }, {});
                     options.onSubmit(formValues);
+                }
+                else{
+                    formElement.submit()
                 }
             }
         }
@@ -48,6 +51,7 @@ function Validator(options){
             }
         })
     }
+
     function validate(inputElement, rule){
         var errorElement = inputElement.parentElement.querySelector(options.errorSelector)
         var errorMessage 
@@ -68,7 +72,6 @@ function Validator(options){
         return !errorMessage   // return Boolean
     }
 }
-
 
 Validator.isRequired = function(selector){
     return{
@@ -106,3 +109,24 @@ Validator.isConfirmed = function(selector, getConfirmValue, message){
         }
     }
 }
+
+Validator({
+    form: '#form-1',
+    errorSelector: '.form-message',
+    rules: [
+        Validator.isRequired('#fullname'),
+        Validator.isRequired('#email'),
+        Validator.isEmail('#email'
+            ,'Truong nay phai la email'),
+        Validator.isRequired('#password'),
+        Validator.minLength('#password', 6
+            ,'Vui long nhap mat khau tren 6 ky tu'),
+        Validator.isRequired('#password_confirmation'),
+        Validator.isConfirmed('#password_confirmation', function(){
+            return document.querySelector('#form-1 #password').value;
+        }, 'Mat khau nhap lai khong chinh xac'),
+    ],
+    onSubmit: function(data){
+        console.log(data)
+    }
+});

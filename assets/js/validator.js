@@ -9,7 +9,7 @@ function Validator(options){
 
             options.rules.forEach(function(rule){
                 var inputElement = formElement.querySelector(rule.selector)
-                var isValid = validate(inputElement, rule)  //Boolean
+                var isValid = validate(inputElement, rule)  //Booleanq
                 if(!isValid){
                     isFormValid = false;
                 }
@@ -51,6 +51,7 @@ function Validator(options){
             }
         })
     }
+
     function validate(inputElement, rule){
         var errorElement = inputElement.parentElement.querySelector(options.errorSelector)
         var errorMessage 
@@ -71,7 +72,6 @@ function Validator(options){
         return !errorMessage   // return Boolean
     }
 }
-
 
 Validator.isRequired = function(selector){
     return{
