@@ -2,12 +2,12 @@ function Validator(options){
     var selectorRules = {}
     var formElement = document.querySelector(options.form)
     if(formElement){
-        formElement.onsubmit = function(e){
+        formElement.onsubmit = (e) => {
             e.preventDefault();
 
             var isFormValid = true;
 
-            options.rules.forEach(function(rule){
+            options.rules.forEach((rule) => {
                 var inputElement = formElement.querySelector(rule.selector)
                 var isValid = validate(inputElement, rule)  //Booleanq
                 if(!isValid){
@@ -37,14 +37,14 @@ function Validator(options){
                 selectorRules[rule.selector] = [rule.test]
             }
 
-            var inputElement = formElement.querySelector(rule.selector) // #fullname ,#email,...
+            var inputElement = formElement.querySelector(rule.selector) 
             var errorElement = inputElement.parentElement.querySelector(options.errorSelector)
 
             if(inputElement){
-                inputElement.onblur = function(){
+                inputElement.onblur = () => {
                     validate(inputElement, rule)
                 }
-                inputElement.oninput = function(){
+                inputElement.oninput = () => {
                     errorElement.innerText = '';
                     inputElement.parentElement.classList.remove('invalid')
                 }
@@ -69,42 +69,42 @@ function Validator(options){
             errorElement.innerText = '';
             inputElement.parentElement.classList.remove('invalid')
         }
-        return !errorMessage   // return Boolean
+        return !errorMessage  
     }
 }
 
-Validator.isRequired = function(selector){
+Validator.isRequired = (selector) => {
     return{
         selector: selector,
-        test: function(value){
+        test: (value) => {
             return value.trim() ? undefined : 'Vui long nhap truong nay'
         }
     }
 }
 
-Validator.isEmail = function(selector, message){
+Validator.isEmail = (selector, message) => {
     return{
         selector: selector,
-        test: function(value){
-            var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        test: (value) => {
+            var regex = /^\w+q([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             return regex.test(value) ? undefined : message
         }
     }
 }
 
-Validator.minLength = function(selector, min , message){
+Validator.minLength = (selector, min , message) => {
     return{
         selector: selector,
-        test: function(value){
+        test: (value) => {
             return value.length >= min ? undefined : message
         }
     }
 }
 
-Validator.isConfirmed = function(selector, getConfirmValue, message){
+Validator.isConfirmed = (selector, getConfirmValue, message) => {
     return{
         selector: selector,
-        test: function(value){
+        test: (value) => {
             return value === getConfirmValue() ? undefined : message 
         }
     }
@@ -122,11 +122,11 @@ Validator({
         Validator.minLength('#password', 6
             ,'Vui long nhap mat khau tren 6 ky tu'),
         Validator.isRequired('#password_confirmation'),
-        Validator.isConfirmed('#password_confirmation', function(){
+        Validator.isConfirmed('#password_confirmation', () => {
             return document.querySelector('#form-1 #password').value;
         }, 'Mat khau nhap lai khong chinh xac'),
     ],
-    onSubmit: function(data){
+    onSubmit: (data) => {
         console.log(data)
     }
 });
