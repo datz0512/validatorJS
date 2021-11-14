@@ -45,8 +45,18 @@ body{
     flex-direction: column;
 }
 
+.form-group.form-group_gender{
+    margin-bottom: 0;
+}
+
 .form-label,
 .form-message{
+    text-align: left;
+}
+
+.radio{
+    display: flex;
+    flex-direction: row;
     text-align: left;
 }
 
@@ -55,6 +65,8 @@ body{
     padding-bottom: 6px;
     line-height: 1.8rem;
     font-size: 1.6rem;
+    display: flex;
+    flex: 1;
 }
 
 .form-control {
@@ -84,11 +96,33 @@ body{
     padding: 4px 0 0;
 }
 
+.gender-form{
+    flex: 1;
+}
+
+.gender-radio{
+    border-radius: 50%;
+    width: 25px;
+    height: 20px;
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+    cursor: pointer;  
+}
+
+.radio-text{
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;  
+}
+
 .form-submit{
     outline: none;
     background-color: blueviolet;
     margin-top: 12px;
-    padding: 12px 16px;
+    padding: 16px 16px;
     font-weight: 600;
     color: #fff;
     border: none;

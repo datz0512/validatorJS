@@ -9,7 +9,7 @@ function Validator(options){
 
             options.rules.forEach((rule) => {
                 var inputElement = formElement.querySelector(rule.selector)
-                var isValid = validate(inputElement, rule)  //Booleanq
+                var isValid = validate(inputElement, rule)  //Boolean
                 if(!isValid){
                     isFormValid = false;
                 }
@@ -22,14 +22,13 @@ function Validator(options){
                         return (values[input.name] = input.value) && values
                     }, {});
                     options.onSubmit(formValues);
-                }
-                else{
+                }else{
                     formElement.submit()
                 }
-            }
+            }       
         }
 
-        options.rules.forEach(function(rule){
+        options.rules.forEach((rule) => {
 
             if(Array.isArray(selectorRules[rule.selector])){
                 selectorRules[rule.selector].push(rule.test)

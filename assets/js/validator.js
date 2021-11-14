@@ -1,5 +1,6 @@
 function Validator(options){
     var selectorRules = {}
+
     var formElement = document.querySelector(options.form)
     if(formElement){
         formElement.onsubmit = (e) => {
@@ -9,7 +10,7 @@ function Validator(options){
 
             options.rules.forEach((rule) => {
                 var inputElement = formElement.querySelector(rule.selector)
-                var isValid = validate(inputElement, rule)  //Booleanq
+                var isValid = validate(inputElement, rule)
                 if(!isValid){
                     isFormValid = false;
                 }
@@ -19,17 +20,39 @@ function Validator(options){
                 if(typeof options.onSubmit === 'function'){
                     var enableInputs = formElement.querySelectorAll('[name]')
                     var formValues = Array.from(enableInputs).reduce((values, input) => {
-                        return (values[input.name] = input.value) && values
-                    }, {});
-                    options.onSubmit(formValues);
-                }
-                else{
+                        
+                        switch(input.type){
+                            case 'radio':
+                                values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
+                                break;
+                            case 'checkbox':
+                                if(!input.matches(':checked')){
+                                    values[input.name] = [];
+                                    return values
+                                }
+                                if(!Array.isArray(values[input.name])){
+                                    values[input.name] = [];
+                                }
+                                values[input.name].push(input.value)
+
+                                break;
+                            case 'file':
+                                values[input.name] = input.file;
+                                break;
+                            default:
+                                values[input.name] = input.value;
+                        }
+
+                        return values
+                    }, {})
+                    options.onSubmit(formValues)
+                }else{
                     formElement.submit()
                 }
             }
         }
 
-        options.rules.forEach(function(rule){
+        options.rules.forEach((rule) => {
 
             if(Array.isArray(selectorRules[rule.selector])){
                 selectorRules[rule.selector].push(rule.test)
@@ -37,37 +60,59 @@ function Validator(options){
                 selectorRules[rule.selector] = [rule.test]
             }
 
-            var inputElement = formElement.querySelector(rule.selector) 
-            var errorElement = inputElement.parentElement.querySelector(options.errorSelector)
-
-            if(inputElement){
+            var inputElements = formElement.querySelectorAll(rule.selector) 
+            Array.from(inputElements).forEach((inputElement) => {
                 inputElement.onblur = () => {
                     validate(inputElement, rule)
                 }
+
                 inputElement.oninput = () => {
+                    var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
                     errorElement.innerText = '';
-                    inputElement.parentElement.classList.remove('invalid')
+                    getParent(inputElement, options.formGroupSelector).classList.remove('invalid')
                 }
-            }
+                
+            })
+
+
+
         })
     }
 
+    function getParent(element, selector){
+        while(element.parentElement){
+            if(element.parentElement.matches(selector)){
+                return element.parentElement;
+            }
+            element = element.parentElement
+        }
+    }
+
     function validate(inputElement, rule){
-        var errorElement = inputElement.parentElement.querySelector(options.errorSelector)
+        var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
         var errorMessage 
 
         var rules = selectorRules[rule.selector]
         for(var i = 0; i < rules.length; ++i){
-            errorMessage = rules[i](inputElement.value)
+            switch(inputElement.type){
+                case 'radio':
+                case 'checkbox':
+                    errorMessage = rules[i](
+                        formElement.querySelector(rule.selector + ':checked')
+                    )
+                    break;
+                default: 
+                    errorMessage = rules[i](inputElement.value)
+            }
             if(errorMessage) break;
         }
 
         if(errorMessage){
             errorElement.innerText = errorMessage;
-            inputElement.parentElement.classList.add('invalid')
+            getParent(inputElement, options.formGroupSelector).classList.add('invalid')
         }else{
             errorElement.innerText = '';
-            inputElement.parentElement.classList.remove('invalid')
+            getParent(inputElement, options.formGroupSelector).classList.remove('invalid')
         }
         return !errorMessage  
     }
@@ -77,7 +122,7 @@ Validator.isRequired = (selector) => {
     return{
         selector: selector,
         test: (value) => {
-            return value.trim() ? undefined : 'Vui long nhap truong nay'
+            return value ? undefined : 'Vui long nhap truong nay'
         }
     }
 }
@@ -112,6 +157,7 @@ Validator.isConfirmed = (selector, getConfirmValue, message) => {
 
 Validator({
     form: '#form-1',
+    formGroupSelector: '.form-group',
     errorSelector: '.form-message',
     rules: [
         Validator.isRequired('#fullname'),
@@ -125,6 +171,9 @@ Validator({
         Validator.isConfirmed('#password_confirmation', () => {
             return document.querySelector('#form-1 #password').value;
         }, 'Mat khau nhap lai khong chinh xac'),
+        Validator.isRequired('#avatar'),
+        Validator.isRequired('#province'),
+        Validator.isRequired('input[name="gender"]'),
     ],
     onSubmit: (data) => {
         console.log(data)
