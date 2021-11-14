@@ -42,7 +42,6 @@ function Validator(options){
                             default:
                                 values[input.name] = input.value;
                         }
-
                         return values
                     }, {})
                     options.onSubmit(formValues)
@@ -70,12 +69,8 @@ function Validator(options){
                     var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
                     errorElement.innerText = '';
                     getParent(inputElement, options.formGroupSelector).classList.remove('invalid')
-                }
-                
+                }            
             })
-
-
-
         })
     }
 
