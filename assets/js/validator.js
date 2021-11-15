@@ -42,7 +42,6 @@ function Validator(options){
                             default:
                                 values[input.name] = input.value;
                         }
-
                         return values
                     }, {})
                     options.onSubmit(formValues)
@@ -167,7 +166,7 @@ Validator({
         Validator.isConfirmed('#password_confirmation', () => {
             return document.querySelector('#form-1 #password').value;
         }, 'Mat khau nhap lai khong chinh xac'),
-        Validator.isRequired('#avatar'),
+        // Validator.isRequired('#avatar'),
         Validator.isRequired('#province'),
         Validator.isRequired('input[name="gender"]'),
     ],
