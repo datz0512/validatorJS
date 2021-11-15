@@ -1,2 +1,2 @@
-https://datz0512.github.io/Form-Validation/
+https://datz0512.github.io/Form-Validation-Library/
 
