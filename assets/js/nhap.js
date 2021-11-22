@@ -26,7 +26,7 @@ function Validator(options){
                                 values[input.name] = formElement.querySelector('input[name="' + input.name + '"]:checked').value;
                                 break;
                             case 'checkbox':
-                                if(!input.matches(':checked')){
+                                if(!input.matches(':checked')){ 
                                     values[input.name] = [];
                                     return values
                                 }
@@ -38,7 +38,6 @@ function Validator(options){
                                 break;
                             case 'file':
                                 values[input.name] = input.file;
-                                break;
                             default:
                                 values[input.name] = input.value;
                         }
@@ -58,7 +57,6 @@ function Validator(options){
             }else{
                 selectorRules[rule.selector] = [rule.test]
             }
-
             var inputElements = formElement.querySelectorAll(rule.selector) 
             Array.from(inputElements).forEach((inputElement) => {
                 inputElement.onblur = () => {
@@ -84,7 +82,8 @@ function Validator(options){
     }
 
     function validate(inputElement, rule){
-        var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
+        var errorElement = getParent(inputElement, options.formGroupSelector)
+                            .querySelector(options.errorSelector)
         var errorMessage 
 
         var rules = selectorRules[rule.selector]
@@ -166,7 +165,7 @@ Validator({
         Validator.isConfirmed('#password_confirmation', () => {
             return document.querySelector('#form-1 #password').value;
         }, 'Mat khau nhap lai khong chinh xac'),
-        Validator.isRequired('#avatar'),
+        // Validator.isRequired('#avatar'),
         Validator.isRequired('#province'),
         Validator.isRequired('input[name="gender"]'),
     ],
