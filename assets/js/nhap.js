@@ -81,8 +81,7 @@ function Validator(options){
     }
 
     function validate(inputElement, rule){
-        var errorElement = getParent(inputElement, options.formGroupSelector)
-                            .querySelector(options.errorSelector)
+        var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
         var errorMessage 
 
         var rules = selectorRules[rule.selector]
