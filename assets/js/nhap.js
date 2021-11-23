@@ -62,7 +62,6 @@ function Validator(options){
                 inputElement.onblur = () => {
                     validate(inputElement, rule)
                 }
-
                 inputElement.oninput = () => {
                     var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
                     errorElement.innerText = '';
