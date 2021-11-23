@@ -66,7 +66,7 @@ function Validator(options){
                     var errorElement = getParent(inputElement, options.formGroupSelector).querySelector(options.errorSelector)
                     errorElement.innerText = '';
                     getParent(inputElement, options.formGroupSelector).classList.remove('invalid')
-                }            
+                }           
             })
         })
     }
