@@ -116,7 +116,7 @@ Validator.isRequired = (selector) => {
     return{
         selector: selector,
         test: (value) => {
-            return value ? undefined : 'Vui long nhap truong nay'
+            return value ? undefined : 'Vui lòng nhập trường này'
         }
     }
 }
@@ -157,14 +157,14 @@ Validator({
         Validator.isRequired('#fullname'),
         Validator.isRequired('#email'),
         Validator.isEmail('#email'
-            ,'Truong nay phai la email'),
+            ,'Trường này phải là email'),
         Validator.isRequired('#password'),
         Validator.minLength('#password', 6
-            ,'Vui long nhap mat khau tren 6 ky tu'),
+            ,'Vui lòng nhập mật khẩu trên 6 ký tự'),
         Validator.isRequired('#password_confirmation'),
         Validator.isConfirmed('#password_confirmation', () => {
             return document.querySelector('#form-1 #password').value;
-        }, 'Mat khau nhap lai khong chinh xac'),
+        }, 'Mật khẩu nhập lại không chính xác'),
         // Validator.isRequired('#avatar'),
         Validator.isRequired('#province'),
         Validator.isRequired('input[name="gender"]'),
