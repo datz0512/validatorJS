@@ -10,7 +10,7 @@ This is a JS library used in registration form written by myself.
 <script src="validator.js"></script>
 ```
 
-### Basic Usage
+## Basic Usage
 
 ```js
 Validator({
@@ -20,11 +20,11 @@ Validator({
     rules: rules
 });
 ```
-__form__  - The selector form you want to validate
+__form__ {Selector}  - The selector form you want to validate
 
-__formGroup__  - The parent selector of each input element
+__formGroup__ {Selector}  - The parent element of each input element
 
-__formMessage__  - The selector where the error message is displayed
+__formMessage__ {Selector}  - The element where the error message is displayed
 
 __rules__ {Array} - Validation rules
 
