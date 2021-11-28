@@ -28,35 +28,35 @@ __formMessage__ {Selector}  - The element where error message is displayed
 
 __rules__ {Array} - Validation rules
 
-### Available Rules
+## Available Rules
 Validation rules do not have an implicit 'required'. If a field is undefined or an empty string, it will pass validation. If you want a validation to fail for undefined or '', use the required rule.
 
 
-#### isRequired
+### isRequired
 ```js
 Validator.isRequired('#fullname')
 // Check if this field is filled in or not
 ```
 
-#### isEmail
+### isEmail
 ```js
 Validator.isEmail('#email', 'This field must be email')
 // Check whether this field is email or not
 ```
 
-#### minLength
+### minLength
 ```js
 Validator.minLength('#password', 6, 'Please enter a password of more than 6 characters'),
 // Check whether the password is more than 6 characters or not
 ```
 
-#### isConfirmed
+### isConfirmed
 ```js
 Validator.isConfirmed('#password_confirmation', 'Re-entered password is incorrect')
 // check whether the re-entered password is correct or not
 ```
 
-### Example
+## Example
 https://datz0512.github.io/validatorJS/
 ```html
 <form action="" method="post" class="form" id="form-1">
