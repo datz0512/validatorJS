@@ -110,13 +110,14 @@
         }
         return !errorMessage  
     }
+
 }
 
 Validator.isRequired = (selector) => {
     return{
         selector: selector,
         test: (value) => {
-            return value ? undefined : 'Vui lòng nhập trường này'
+            return value ? undefined : 'Please enter this field'
         }
     }
 }
@@ -140,11 +141,11 @@ Validator.minLength = (selector, min , message) => {
     }
 }
 
-Validator.isConfirmed = (selector, getConfirmValue, message) => {
+Validator.isConfirmed = (selector, message) => {
     return{
         selector: selector,
         test: (value) => {
-            return value === getConfirmValue() ? undefined : message 
+            return value === document.querySelector('#form-1 #password').value ? undefined : message 
         }
     }
 }
@@ -156,15 +157,11 @@ Validator({
     rules: [
         Validator.isRequired('#fullname'),
         Validator.isRequired('#email'),
-        Validator.isEmail('#email'
-            ,'Trường này phải là email'),
+        Validator.isEmail('#email','This field must be email'),
         Validator.isRequired('#password'),
-        Validator.minLength('#password', 6
-            ,'Vui lòng nhập mật khẩu trên 6 ký tự'),
+        Validator.minLength('#password', 6, 'Please enter a password of more than 6 characters'),
         Validator.isRequired('#password_confirmation'),
-        Validator.isConfirmed('#password_confirmation', () => {
-            return document.querySelector('#form-1 #password').value;
-        }, 'Mật khẩu nhập lại không chính xác'),
+        Validator.isConfirmed('#password_confirmation', 'Re-entered password is incorrect'),
         // Validator.isRequired('#avatar'),
         Validator.isRequired('#province'),
         Validator.isRequired('input[name="gender"]'),
