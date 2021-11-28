@@ -20,11 +20,11 @@ Validator({
     rules: rules
 });
 ```
-__form__ {Selector}  - The selector form you want to validate
+__form__ {Selector}  - The form you want to validate
 
 __formGroup__ {Selector}  - The parent element of each input element
 
-__formMessage__ {Selector}  - The element where the error message is displayed
+__formMessage__ {Selector}  - The element where error message is displayed
 
 __rules__ {Array} - Validation rules
 
