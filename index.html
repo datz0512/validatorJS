@@ -9,45 +9,45 @@
 </head>
 <body>
     <form action="" method="post" class="form" id="form-1">
-        <h3 class="heading">Thành viên đăng ký</h3>
-        <p class="desc">Câu lạc bộ ABCDJQK</p>
+        <h3 class="heading">Register Form</h3>
+        <p class="desc">Do Tien Dat's Fan Club</p>
 
         <div class="spacer"></div>
 
         <div class="form-group">
-            <label for="fullname" class="form-label">Tên đầy đủ</label>
+            <label for="fullname" class="form-label">Fullname *</label>
             <input type="text" id="fullname" name="fullname" placeholder="VD: Đỗ Tiến Đạt" class="form-control">
             <span class="form-message"></span>
         </div>
 
         <div class="form-group">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label">Email *</label>
             <input type="email" id="email" name="email" placeholder="VD: dat2003@gmail.com" class="form-control">
             <span class="form-message"></span>
         </div>
 
         <div class="form-group">
-            <label for="password" class="form-label">Mật khẩu</label>
+            <label for="password" class="form-label">Password *</label>
             <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
             <span class="form-message"></span>
         </div>
 
         <div class="form-group">
-            <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+            <label for="password_confirmation" class="form-label">Confirm Password *</label>
             <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" class="form-control">
             <span class="form-message"></span>
         </div>
 
         <div class="form-group">
-            <label for="avatar" class="form-label">Ảnh đại diện</label>
+            <label for="avatar" class="form-label">Avatar</label>
             <input type="file" id="avatar" name="avatar" placeholder="Ảnh đại diện" class="form-control">
             <span class="form-message"></span>
         </div>
 
         <div class="form-group">
-            <label for="province" class="form-label">Tỉnh/Thành phố</label>
+            <label for="province" class="form-label">Province/City *</label>
             <select id="province" name="province" class="form-control">
-                <option value="">-- Chọn Tỉnh/TP --</option>
+                <option value="">-- Choose Province/City --</option>
                 <option value="hni">Hà Nội</option>
                 <option value="hpg">Hải Phòng</option>
             </select>
@@ -55,18 +55,18 @@
         </div>
 
         <div class="form-group form-group_gender">
-            <label for="gender" class="form-label">Giới tính
+            <label for="gender" class="form-label">Gender *
                 <div class="gender-form">
                     <input type="radio" class="gender-radio" name="gender" value="male" id="male">
-                    <label class="radio-text" for="male">Nam<br>
+                    <label class="radio-text" for="male">Male<br>
                 </div>
                 <div class="gender-form">
                     <input type="radio" class="gender-radio" name="gender" value="female" id="female">
-                    <label class="radio-text" for="female">Nữ</label><br>
+                    <label class="radio-text" for="female">Female</label><br>
                 </div>
                 <div class="gender-form">
                     <input type="radio" class="gender-radio" name="gender" value="other" id="other">
-                    <label class="radio-text" for="other">Khác</label><br>
+                    <label class="radio-text" for="other">Other</label><br>
                 </div>
             </label>
             <p class="form-message form-message_gender"></p>
@@ -74,7 +74,7 @@
 
         <button class="form-submit">Đăng ký</button>
     </form>
-    <script src="./assets/js/nhap.js"></script>
+    <!-- <script src="./assets/js/nhap.js"></script> -->
     <script src="./assets/js/validator.js"></script>
 </body>
 </html>
